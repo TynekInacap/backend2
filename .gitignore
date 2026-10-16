@@ -10,7 +10,6 @@ env/
 # Local environment files
 .env
 .env.*
-!.env.example
 
 # Django
 *.sqlite3
