@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto 14 - Sistema de Tickets de Soporte</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f3f3f3;
+            color: #1e1e1e;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+            background: #f4f4f4;
+            border: 1px solid #cfcfcf;
+            box-sizing: border-box;
+        }
+        .header {
+            text-align: center;
+            padding: 18px 20px;
+            border-bottom: 1px solid #cfcfcf;
+            font-size: 2.1rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+        }
+        .content {
+            padding: 30px 35px 24px;
+            font-size: 1.15rem;
+            line-height: 1.7;
+        }
+        .content h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        .footer {
+            border-top: 1px solid #cfcfcf;
+            text-align: center;
+            padding: 18px 0;
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+        @media (max-width: 768px) {
+            .header { font-size: 1.5rem; }
+            .content { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Proyecto 14 - Sistema de Tickets de Soporte</div>
+
+        <div class="content">
+            <h1>Sistema de Tickets de Soporte</h1>
+
+            <p>
+                Mesa de ayuda necesita digitalizar la gestión de incidencias de soporte. Actualmente gran parte de la información se mantiene distribuida en distintos registros, lo que dificulta el seguimiento de operaciones, la generación de reportes y la coordinación entre los distintos actores involucrados. El sistema deberá centralizar la información relevante y ofrecer mecanismos que permitan mantener datos históricos consistentes.
+            </p>
+
+            <p>
+                Los clientes y técnicos interactúan diariamente con la plataforma realizando operaciones que afectan el estado de los registros. Será necesario almacenar antecedentes históricos, controlar situaciones excepcionales, validar reglas de negocio y facilitar consultas complejas utilizando diferentes criterios de búsqueda. Determinados eventos producirán cambios de estado que deberán quedar registrados para efectos de auditoría y seguimiento.
+            </p>
+
+            <p>
+                La organización requiere además indicadores de gestión que permitan analizar tendencias, actividad reciente, utilización de recursos y comportamiento de los usuarios. El diseño deberá considerar distintos perfiles de acceso, información pública y privada, relaciones de dependencia entre los datos y procesos que involucren múltiples entidades conectadas entre sí. La descripción entrega suficiente contexto para que el equipo de desarrollo identifique actores, entidades, relaciones, restricciones, reglas de integridad y posibles escenarios de uso.
+            </p>
+        </div>
+
+        <div class="footer">Programación Backend - INACAP 2026</div>
+    </div>
+</body>
+</html>

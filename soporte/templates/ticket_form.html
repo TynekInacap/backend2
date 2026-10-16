@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Crear Ticket{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="badge">{{ role_label }}</div>
+    <h1>{% if editing %}Editar ticket{% else %}Crear nuevo ticket{% endif %}</h1>
+    <p class="muted">Registra la incidencia del sistema y asigna la prioridad adecuada.</p>
+</div>
+
+<div class="panel">
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-grid">
+            <div>
+                <label for="title">Título</label>
+                <input id="title" type="text" name="title" placeholder="Ej: Error de inicio de sesión" required>
+            </div>
+            <div>
+                <label for="priority">Prioridad</label>
+                <select id="priority" name="priority">
+                    <option value="baja">Baja</option>
+                    <option value="media" selected>Media</option>
+                    <option value="alta">Alta</option>
+                    <option value="critica">Crítica</option>
+                </select>
+            </div>
+            <div>
+                <label for="category">Categoría</label>
+                <select id="category" name="category">
+                    <option value="">Sin categoría</option>
+                    {% for category in categories %}
+                        <option value="{{ category.pk }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <label for="description">Descripción</label>
+        <textarea id="description" name="description" placeholder="Describe el problema con el mayor detalle posible." required></textarea>
+
+        <div class="actions">
+            <button class="btn btn-primary" type="submit">Guardar ticket</button>
+            <a class="btn btn-secondary" href="{% url 'tickets' %}">Volver</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

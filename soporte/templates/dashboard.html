@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="badge">{{ role_label }}</div>
+    <h1>Dashboard del sistema</h1>
+    <p class="muted">Bienvenido {{ user.username }}. Aquí puedes revisar la actividad y administrar los tickets según tu perfil.</p>
+</div>
+
+<div class="grid">
+    <div class="card">
+        <div class="muted">Total de tickets</div>
+        <div class="kpi">{{ stats.total }}</div>
+    </div>
+    <div class="card">
+        <div class="muted">Abiertos</div>
+        <div class="kpi" style="color: var(--success);">{{ stats.abiertos }}</div>
+    </div>
+    <div class="card">
+        <div class="muted">En proceso</div>
+        <div class="kpi" style="color: var(--warning);">{{ stats.en_proceso }}</div>
+    </div>
+    <div class="card">
+        <div class="muted">Resueltos</div>
+        <div class="kpi" style="color: var(--primary);">{{ stats.resueltos }}</div>
+    </div>
+</div>
+
+<div class="panel" style="margin-top: 24px;">
+    <h2>Últimos tickets</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Estado</th>
+                <th>Prioridad</th>
+                <th>Solicitante</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ticket in tickets %}
+            <tr>
+                <td>#{{ ticket.id }}</td>
+                <td>{{ ticket.title }}</td>
+                <td><span class="status {{ ticket.status }}">{{ ticket.get_status_display }}</span></td>
+                <td><span class="priority {{ ticket.priority }}">{{ ticket.get_priority_display }}</span></td>
+                <td>{{ ticket.created_by }}</td>
+                <td><a class="btn btn-secondary" href="{% url 'ticket_detail' ticket_id=ticket.id %}">Ver</a></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="muted">No hay tickets disponibles para tu perfil.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

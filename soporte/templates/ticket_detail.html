@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalle del Ticket{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="badge">{{ role_label }}</div>
+    <h1>{{ ticket.title }}</h1>
+    <p class="muted">Ticket #{{ ticket.id }} · Solicitante: {{ ticket.created_by }} · Técnico: {{ ticket.assigned_to.username|default:'Sin asignar' }}</p>
+    {% if can_claim %}
+        <form method="post" action="{% url 'ticket_claim' ticket_id=ticket.id %}">
+            {% csrf_token %}
+            <button class="btn btn-primary" type="submit">Reclamar ticket</button>
+        </form>
+    {% endif %}
+</div>
+
+<div class="two-col">
+    <div class="panel">
+        <h2>Detalle</h2>
+        <p>{{ ticket.description }}</p>
+        <p><strong>Estado:</strong> <span class="status {{ ticket.status }}">{{ ticket.get_status_display }}</span></p>
+        <p><strong>Prioridad:</strong> <span class="priority {{ ticket.priority }}">{{ ticket.get_priority_display }}</span></p>
+        <p><strong>Creado:</strong> {{ ticket.created_at|date:'d/m/Y H:i' }}</p>
+
+        {% if can_manage_ticket %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-grid">
+                <div>
+                    <label for="status">Estado</label>
+                    <select id="status" name="status">
+                        <option value="abierto" {% if ticket.status == 'abierto' %}selected{% endif %}>Abierto</option>
+                        <option value="en_proceso" {% if ticket.status == 'en_proceso' %}selected{% endif %}>En proceso</option>
+                        <option value="pendiente" {% if ticket.status == 'pendiente' %}selected{% endif %}>Pendiente</option>
+                        <option value="resuelto" {% if ticket.status == 'resuelto' %}selected{% endif %}>Resuelto</option>
+                        <option value="cerrado" {% if ticket.status == 'cerrado' %}selected{% endif %}>Cerrado</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="priority">Prioridad</label>
+                    <select id="priority" name="priority">
+                        <option value="baja" {% if ticket.priority == 'baja' %}selected{% endif %}>Baja</option>
+                        <option value="media" {% if ticket.priority == 'media' %}selected{% endif %}>Media</option>
+                        <option value="alta" {% if ticket.priority == 'alta' %}selected{% endif %}>Alta</option>
+                        <option value="critica" {% if ticket.priority == 'critica' %}selected{% endif %}>Crítica</option>
+                    </select>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="btn btn-primary" type="submit">Actualizar</button>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+
+    <div class="panel">
+        <h2>Comentarios</h2>
+        {% if comments %}
+            {% for comment in comments %}
+                <div class="card" style="margin-bottom: 12px;">
+                    <strong>{{ comment.author }}</strong>
+                    <div class="muted">{{ comment.created_at|date:'d/m/Y H:i' }}</div>
+                    <p>{{ comment.message }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="muted">Aún no hay comentarios.</p>
+        {% endif %}
+
+        {% if can_manage_ticket %}
+            <form method="post">
+                {% csrf_token %}
+                <label for="message">Agregar comentario</label>
+                <textarea id="message" name="message" placeholder="Escribe tu respuesta..."></textarea>
+                <div class="actions">
+                    <button class="btn btn-primary" type="submit">Enviar</button>
+                </div>
+            </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

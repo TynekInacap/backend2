@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+<style>
+    .auth-shell {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 70vh;
+        padding: 24px 0;
+    }
+
+    .auth-card {
+        width: min(100%, 760px);
+        background: rgba(255,255,255,0.8);
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        border-radius: 28px;
+        overflow: hidden;
+        box-shadow: 0 30px 80px rgba(15, 23, 42, 0.10);
+        backdrop-filter: blur(6px);
+    }
+
+    .auth-header {
+        background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 60%, #60a5fa 100%);
+        color: white;
+        padding: 32px 28px;
+    }
+
+    .auth-header h1 {
+        margin: 0;
+        font-size: clamp(2rem, 2vw + 1rem, 2.8rem);
+    }
+
+    .auth-header p {
+        margin: 8px 0 0;
+        color: rgba(255,255,255,0.8);
+    }
+
+    .auth-body {
+        padding: 28px;
+    }
+
+    .field {
+        margin-bottom: 16px;
+    }
+
+    .field label {
+        display: block;
+        margin-bottom: 7px;
+        font-weight: 700;
+    }
+
+    .field input {
+        margin: 0;
+        border-radius: 12px;
+        background: #f8fafc;
+        border: 1px solid #dfe7f3;
+        padding: 13px 14px;
+        font-size: 1rem;
+    }
+
+    .form-help {
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-top: 6px;
+    }
+
+    .auth-actions {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        margin-top: 18px;
+        flex-wrap: wrap;
+    }
+
+    .auth-actions .btn {
+        min-width: 170px;
+    }
+
+    .text-link {
+        color: var(--primary);
+        font-weight: 700;
+    }
+</style>
+
+<div class="auth-shell">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1>Crear cuenta</h1>
+            <p>Únete a TicketFlow y comienza a gestionar tus tickets.</p>
+        </div>
+
+        <div class="auth-body">
+            <form method="post">
+                {% csrf_token %}
+
+                {% for field in form %}
+                    <div class="field">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <div class="form-help">{{ field.help_text }}</div>
+                        {% endif %}
+                        {% if field.errors %}
+                            <div class="alert alert-error" style="margin-top: 8px;">{{ field.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <div class="auth-actions">
+                    <button type="submit" class="btn btn-primary">Registrarme</button>
+                    <a href="{% url 'login' %}" class="text-link">Ya tengo cuenta</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

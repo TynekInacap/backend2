@@ -1,0 +1,42 @@
+[
+  {
+    "model": "soporte.ticketcategory",
+    "pk": 1,
+    "fields": {
+      "name": "Hardware",
+      "description": "Equipos, periféricos y componentes físicos.",
+      "is_active": true,
+      "created_at": "2026-10-16T00:00:00Z"
+    }
+  },
+  {
+    "model": "soporte.ticketcategory",
+    "pk": 2,
+    "fields": {
+      "name": "Software",
+      "description": "Aplicaciones, sistemas operativos y licencias.",
+      "is_active": true,
+      "created_at": "2026-10-16T00:00:00Z"
+    }
+  },
+  {
+    "model": "soporte.ticketcategory",
+    "pk": 3,
+    "fields": {
+      "name": "Redes",
+      "description": "Conectividad, internet y acceso a la red.",
+      "is_active": true,
+      "created_at": "2026-10-16T00:00:00Z"
+    }
+  },
+  {
+    "model": "soporte.ticketcategory",
+    "pk": 4,
+    "fields": {
+      "name": "Cuentas y accesos",
+      "description": "Usuarios, contraseñas y permisos de acceso.",
+      "is_active": true,
+      "created_at": "2026-10-16T00:00:00Z"
+    }
+  }
+]
