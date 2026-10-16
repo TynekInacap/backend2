@@ -8,9 +8,8 @@ venv/
 env/
 
 # Local environment files
-.env
-#.env.*
-!.env.example
+# .env
+# .env.*
 
 # Django
 *.sqlite3
